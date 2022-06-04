@@ -63,10 +63,10 @@ class KeywordQueryEventListener(EventListener):
 
     def on_event(self, event, extension):
         g = Github(extension.preferences['github_token'])
-        x = threading.Thread(target=query_github, args=(g,q,), daemon=True)
-        results = open("results.txt", "r")
+        x = threading.Thread(target=query_github, args=(g,event.get_argument(),), daemon=True)
+        results = query_github(g, event.get_argument())
         logger.info('preferences %s' % json.dumps(extension.preferences))
-        for result in results.readlines():
+        for result in results:
             url = result.url
             result_name = result.split('/')[-1]
             # data = {'name': '%s %s was clicked' % (item_name, i)}
