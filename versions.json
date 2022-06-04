@@ -1,4 +1,8 @@
 [
+<<<<<<< HEAD
+=======
+  {"required_api_version": "^2.3.1", "commit": "master"},
+>>>>>>> d22feab04c6dcf09b2897457a8d730cd268d801d
   { "required_api_version": "^1.0.0", "commit": "python2" },
   { "required_api_version": "^2.0.0", "commit": "master" }
 ]
