@@ -1,3 +1,3 @@
-# Demo Extension
+# SearchHacktricks
 
 <img aligh="center" src="http://i.imgur.com/NFFR1tm.png">
