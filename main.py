@@ -9,8 +9,12 @@ from ulauncher.api.shared.action.RenderResultListAction import RenderResultListA
 from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAction
 from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
 
+from github import Github
+g = Github(extension.preferences['github_token'])
+
 logger = logging.getLogger(__name__)
 
+url = "https://book.hacktricks.xyz/welcome/readme"
 
 class SearchHacktricks(Extension):
 
@@ -19,6 +23,30 @@ class SearchHacktricks(Extension):
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
         self.subscribe(ItemEnterEvent, ItemEnterEventListener())
 
+    def query_github(q):
+        rate_limit = g.get_rate_limit()
+        rate = rate_limit.search
+        if rate.remaining == 0:
+            print(f'You have 0/{rate.limit} API calls remaining. Reset time: {rate.reset}')
+            return
+        else:
+            print(f'You have {rate.remaining}/{rate.limit} API calls remaining')
+    
+        query = f'"{keyword} english" in:file extension:md'
+        result = g.search_code(query, order='desc')
+    
+        max_size = 15
+        print(f'Found {result.totalCount} file(s)')
+        if result.totalCount > max_size:
+            result = result[:max_size]
+    
+        for file in result:
+            print(f'{file.download_url}')
+
+
+    def query_hacktricks(q):
+        url = f"{url}?q={q}"
+        
 
 class KeywordQueryEventListener(EventListener):
 
@@ -26,7 +54,7 @@ class KeywordQueryEventListener(EventListener):
         items = []
         logger.info('preferences %s' % json.dumps(extension.preferences))
         for i in range(5):
-            item_name = extension.preferences['item_name']
+            item_name = "iteam"
             data = {'new_name': '%s %s was clicked' % (item_name, i)}
             items.append(ExtensionResultItem(icon='images/icon.png',
                                              name='%s %s' % (item_name, i),
