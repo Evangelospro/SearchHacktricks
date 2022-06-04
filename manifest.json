@@ -9,10 +9,10 @@
   },
   "preferences": [
     {
-      "id": "demo_kw",
+      "id": "kw",
       "type": "keyword",
-      "name": "Demo",
-      "default_value": "dm"
+      "name": "master",
+      "default_value": "ht"
     },
     {
       "id": "item_name",

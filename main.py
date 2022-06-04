@@ -12,10 +12,10 @@ from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
 logger = logging.getLogger(__name__)
 
 
-class DemoExtension(Extension):
+class SearchHacktricks(Extension):
 
     def __init__(self):
-        super(DemoExtension, self).__init__()
+        super(SearchHacktricks, self).__init__()
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
         self.subscribe(ItemEnterEvent, ItemEnterEventListener())
 
@@ -46,4 +46,4 @@ class ItemEnterEventListener(EventListener):
 
 
 if __name__ == '__main__':
-    DemoExtension().run()
+    SearchHacktricks().run()
