@@ -1,57 +1,60 @@
-<<<<<<< HEAD
-=======
 import json
 import logging
 from time import sleep
->>>>>>> 7713e939b80fa031af6d18f172937f3c0670c022
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
-<<<<<<< HEAD
-from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
-
-=======
 from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAction
 from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
 
+from github import Github
+g = Github(extension.preferences['github_token'])
+
 logger = logging.getLogger(__name__)
 
->>>>>>> 7713e939b80fa031af6d18f172937f3c0670c022
+url = "https://book.hacktricks.xyz/welcome/readme"
 
 class SearchHacktricks(Extension):
 
     def __init__(self):
-<<<<<<< HEAD
-        super().__init__()
-        self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
-=======
         super(SearchHacktricks, self).__init__()
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
         self.subscribe(ItemEnterEvent, ItemEnterEventListener())
->>>>>>> 7713e939b80fa031af6d18f172937f3c0670c022
 
+    def query_github(q):
+        rate_limit = g.get_rate_limit()
+        rate = rate_limit.search
+        if rate.remaining == 0:
+            print(f'You have 0/{rate.limit} API calls remaining. Reset time: {rate.reset}')
+            return
+        else:
+            print(f'You have {rate.remaining}/{rate.limit} API calls remaining')
+    
+        query = f'"{keyword} english" in:file extension:md'
+        result = g.search_code(query, order='desc')
+    
+        max_size = 15
+        print(f'Found {result.totalCount} file(s)')
+        if result.totalCount > max_size:
+            result = result[:max_size]
+    
+        for file in result:
+            print(f'{file.download_url}')
+
+
+    def query_hacktricks(q):
+        url = f"{url}?q={q}"
+        
 
 class KeywordQueryEventListener(EventListener):
 
     def on_event(self, event, extension):
         items = []
-<<<<<<< HEAD
-        for i in range(5):
-            items.append(ExtensionResultItem(icon='images/icon.png',
-                                             name='Item %s' % i,
-                                             description='Item description %s' % i,
-                                             on_enter=HideWindowAction()))
-
-        return RenderResultListAction(items)
-
-if __name__ == '__main__':
-    SearchHacktricks().run()
-=======
         logger.info('preferences %s' % json.dumps(extension.preferences))
         for i in range(5):
-            item_name = extension.preferences['item_name']
+            item_name = "iteam"
             data = {'new_name': '%s %s was clicked' % (item_name, i)}
             items.append(ExtensionResultItem(icon='images/icon.png',
                                              name='%s %s' % (item_name, i),
@@ -72,4 +75,3 @@ class ItemEnterEventListener(EventListener):
 
 if __name__ == '__main__':
     SearchHacktricks().run()
->>>>>>> 7713e939b80fa031af6d18f172937f3c0670c022
