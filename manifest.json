@@ -19,7 +19,7 @@
       "type": "input",
       "name": "Github Access token",
       "description": "Github Access token",
-      "default_value": "token123..."
+      "default_value": ""
     }
   ]
 }

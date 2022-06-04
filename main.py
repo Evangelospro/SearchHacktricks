@@ -1,6 +1,5 @@
 import json
 import logging
-from time import sleep
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
@@ -10,7 +9,6 @@ from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAct
 from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
 
 from github import Github
-g = Github(extension.preferences['github_token'])
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +21,8 @@ class SearchHacktricks(Extension):
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
         self.subscribe(ItemEnterEvent, ItemEnterEventListener())
 
-    def query_github(q):
+        
+    def query_github(g, q):
         rate_limit = g.get_rate_limit()
         rate = rate_limit.search
         if rate.remaining == 0:
@@ -51,6 +50,7 @@ class SearchHacktricks(Extension):
 class KeywordQueryEventListener(EventListener):
 
     def on_event(self, event, extension):
+        g = Github(extension.preferences['github_token'])
         items = []
         logger.info('preferences %s' % json.dumps(extension.preferences))
         for i in range(5):
