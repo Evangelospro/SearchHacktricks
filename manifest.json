@@ -20,13 +20,6 @@
       "name": "Github Access token",
       "description": "Github Access token",
       "default_value": "token123..."
-    },
-    {
-      "id": "memo",
-      "type": "text",
-      "name": "Memo",
-      "description": "Write something here",
-      "default_value": ""
     }
   ]
 }
