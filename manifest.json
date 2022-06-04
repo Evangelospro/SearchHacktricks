@@ -1,28 +1,8 @@
 {
-<<<<<<< HEAD
-    "required_api_version": "^2.0.0",
-    "name": "Hacktricks Search",
-    "description": "Search hacktricks with ease from ulauncher",
-    "developer_name": "Evangelos Lioudakis",
-    "icon": "images/icon.png",
-    "options": {
-      "query_debounce": 0.1
-    },
-    "preferences": [
-      {
-        "id": "kw",
-        "type": "keyword",
-        "name": "master",
-        "description": "keyword to start querying hacktricks",
-        "default_value": "ht"
-      }
-    ]
-  }
-=======
   "required_api_version": "^2.0.0",
-  "name": "Demo",
-  "description": "Demo extension",
-  "developer_name": "Aleksandr Gornostal",
+  "name": "SearchHacktricks",
+  "description": "Search Hacktricks with ease using ulauncher",
+  "developer_name": "Evangelos Lioudakis",
   "icon": "images/icon.png",
   "options": {
     "query_debounce": 0.05
@@ -35,11 +15,11 @@
       "default_value": "ht"
     },
     {
-      "id": "item_name",
+      "id": "github_token",
       "type": "input",
-      "name": "Item name",
-      "description": "Name for each item",
-      "default_value": "Item"
+      "name": "Github Access token",
+      "description": "Github Access token",
+      "default_value": "token123..."
     },
     {
       "id": "memo",
@@ -50,4 +30,3 @@
     }
   ]
 }
->>>>>>> 7713e939b80fa031af6d18f172937f3c0670c022
