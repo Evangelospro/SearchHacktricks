@@ -54,6 +54,7 @@ class SearchHacktricks(Extension):
     def __init__(self):
         super(SearchHacktricks, self).__init__()
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
+        self.subscribe(ItemEnterEvent, ItemEnterEventListener())
 
         
 
@@ -75,7 +76,13 @@ class KeywordQueryEventListener(EventListener):
                                              on_enter=OpenUrlAction(url)))
 
         return RenderResultListAction(items)
-
+class ItemEnterEventListener(EventListener):
+    
+    def on_event(self, event, extension):
+        data = event.get_data()
+        return RenderResultListAction([ExtensionResultItem(icon='images/icon.png',
+                                                           name=data['new_name'],
+                                                           on_enter=HideWindowAction())])
 
 if __name__ == '__main__':
     SearchHacktricks().run()
