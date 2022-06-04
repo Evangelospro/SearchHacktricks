@@ -1,9 +1,5 @@
 [
-<<<<<<< HEAD
-    {"required_api_version": "^2.3.1", "commit": "master"}
-  ]
-=======
+  {"required_api_version": "^2.3.1", "commit": "master"},
   { "required_api_version": "^1.0.0", "commit": "python2" },
   { "required_api_version": "^2.0.0", "commit": "master" }
 ]
->>>>>>> 7713e939b80fa031af6d18f172937f3c0670c022
