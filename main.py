@@ -19,8 +19,6 @@ github_url = "https://github.com/carlospolop/hacktricks."
 
 blacklisted_files = [".git", ".gitbook", ".github", ".gitignore"]
 
-# make the search_files function run in a separate thread
-
 
 def search_files(repo_code, repo, q, root):    
     results = []
@@ -62,6 +60,7 @@ class SearchHacktricks(Extension):
 class KeywordQueryEventListener(EventListener):
 
     def on_event(self, event, extension):
+        items = []
         g = Github(extension.preferences['github_token'])
         x = threading.Thread(target=query_github, args=(g,event.get_argument(),), daemon=True)
         results = query_github(g, event.get_argument())
